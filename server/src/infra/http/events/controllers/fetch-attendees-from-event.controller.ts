@@ -19,7 +19,7 @@ export const fetchAttendeesResponse = z.object({
       name: z.string(),
       email: z.string().email(),
       attendeeOn: z.string().uuid(),
-      checkInAt: z.string().nullable(),
+      checkInAt: z.date().nullable(),
     }),
   ),
   total: z.number().int().positive(),
@@ -44,9 +44,11 @@ export class FetchAttendeesFromEventController extends Controller {
       return this.badRequest(result.value)
     }
 
-    return this.ok({
+    const response = {
       attendees: result.value.attendees.map(AttendeeFromEventPresenter.toHttp),
       total: result.value.total,
-    })
+    }
+
+    return this.ok(response)
   }
 }

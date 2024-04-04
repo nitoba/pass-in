@@ -10,7 +10,7 @@ export const createCheckInSchema = z.object(
 )
 
 export const createCheckInSchemaResponse = z.object({
-  attendeeId: z.string().uuid(),
+  checkInId: z.string().uuid(),
 })
 
 export class CheckInOnEventController extends Controller {

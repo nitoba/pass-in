@@ -1,5 +1,7 @@
 {
   "name": "pass-in",
+  "author": "Bruno Alves",
+  "homepage": "https://github.com/nitoba/pass-in",
   "module": "index.ts",
   "type": "module",
   "scripts": {

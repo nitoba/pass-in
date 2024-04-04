@@ -8,7 +8,7 @@ async function runMigrate() {
   await sql.connect()
   const db = drizzle(sql)
   await migrate(db, {
-    migrationsFolder: 'src/infra/database/drizzle/migrations',
+    migrationsFolder: 'migrations',
   })
   await sql.end()
 }

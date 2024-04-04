@@ -1,1 +1,0 @@
-ALTER TABLE "attendees" ALTER COLUMN "event_id" SET NOT NULL;

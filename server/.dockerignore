@@ -1,0 +1,7 @@
+node_modules/
+dist
+.git*
+docker-compose.yaml
+Dockerfile
+README.md
+client.http

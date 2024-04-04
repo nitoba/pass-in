@@ -1,0 +1,1 @@
+ALTER TABLE "attendees" ADD COLUMN "check_in_id" text;

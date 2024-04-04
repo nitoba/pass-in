@@ -1,0 +1,27 @@
+version: "3.8"
+
+services:
+  api-pass-in:
+    build:
+      context: .
+    ports:
+      - 3333:3333
+    environment:
+      DATABASE_URL: postgres://docker:docker@postgres:5432/pass_in
+    depends_on:
+      - postgres
+
+  postgres:
+    container_name: pass_in_pg
+    image: bitnami/postgresql:latest
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: docker
+      POSTGRES_PASSWORD: docker
+      POSTGRES_DB: pass_in
+    volumes:
+      - pass_in_pg_data:/bitnami/postgresql
+
+volumes:
+  pass_in_pg_data:

@@ -1,0 +1,37 @@
+POST http://localhost:3333/events
+Content-Type: application/json
+
+{
+    "title": "NLW Unite 2",
+    "details": "Um evento para quem é apaixonado por tecnologia",
+    "maximumAttendees": 1
+}
+
+###
+POST http://localhost:3333/events/93b570f2-a7d8-4b54-8c41-83bccdd705df/attendees
+Content-Type: application/json
+
+{
+    "name": "Jon Doe",
+    "email": "jon.doe@email.com"
+}
+
+
+###
+GET http://localhost:3333/events/93b570f2-a7d8-4b54-8c41-83bccdd705df/attendees?page=1&query=doe
+Content-Type: application/json
+
+###
+GET http://localhost:3333/events/nlw-unite-2
+Content-Type: application/json
+
+###
+GET http://localhost:3333/attendees/fd725bf1-5abf-4f85-928c-7836d0d0e854/badge
+Content-Type: application/json
+
+
+###
+GET http://localhost:3333/attendees/b68d1e6d-f925-4e11-abf8-110a97939a30/check-in
+Content-Type: application/json
+
+

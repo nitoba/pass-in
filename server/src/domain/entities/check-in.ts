@@ -3,7 +3,7 @@ import { Event } from './event'
 import { Attendee } from './attendee'
 import type { UniqueEntityID } from '@/core/entities/unique-entity-id'
 
-type CheckInProps = {
+export type CheckInProps = {
   event: Event
   attendee: Attendee
 }

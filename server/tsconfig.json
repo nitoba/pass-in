@@ -19,6 +19,7 @@
     "skipLibCheck": true,
     "noFallthroughCasesInSwitch": true,
     "allowSyntheticDefaultImports": true,
+    "types": ["vitest/globals"],
 
     // Some stricter flags (disabled by default)
     "noUnusedLocals": false,

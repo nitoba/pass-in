@@ -4,7 +4,7 @@ import type { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import type { Optional } from '@/core/optional'
 import { makeSlug } from '@/utils/make-slug'
 
-type EventProps = {
+export type EventProps = {
   title: string
   slug: string
   details: string | null

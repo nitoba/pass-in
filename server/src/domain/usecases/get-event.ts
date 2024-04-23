@@ -1,4 +1,4 @@
-import { right, type Either } from '@/core/either'
+import { left, right, type Either } from '@/core/either'
 import type { EventRepository } from '../repositories/event-repository'
 import type { Event } from '../entities/event'
 
@@ -16,7 +16,7 @@ export class GetEventUseCase {
   }: GetEventUseCaseRequest): Promise<GetEventUseCaseResponse> {
     const event = await this.eventRepository.findBySlug(slug)
     if (!event) {
-      throw new Error('Event not found')
+      return left(new Error('Event not found'))
     }
 
     return right({ event })

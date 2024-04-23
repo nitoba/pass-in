@@ -18,6 +18,7 @@ import relativeTime from 'dayjs/plugin/relativeTime'
 import { useQuery } from '@tanstack/react-query'
 import { getAttendeesFromEvent } from '../services/get-attendes-from-event'
 import { useDebounce } from '@uidotdev/usehooks'
+import { AttendeeTableSkeleton } from './attendee-skeleton'
 
 dayjs.extend(relativeTime)
 dayjs.locale('pt-br')
@@ -45,7 +46,7 @@ export function AttendeeList() {
 
   const debouncedSearchTerm = useDebounce(search, 300)
 
-  const { data } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ['attendees', page, debouncedSearchTerm],
     queryFn: () => getAttendeesFromEvent({ page, query: debouncedSearchTerm }),
   })
@@ -119,37 +120,39 @@ export function AttendeeList() {
           </tr>
         </thead>
         <tbody>
-          {data?.attendees.map((attendee) => {
-            return (
-              <TableRow key={attendee.id}>
-                <TableCell>{attendee.id}</TableCell>
-                <TableCell>
-                  <div className="flex flex-col gap-1">
-                    <span className="font-semibold text-white">
-                      {attendee.name}
-                    </span>
-                    <span>{attendee.email}</span>
-                  </div>
-                </TableCell>
-                <TableCell>{dayjs().to(attendee.checkedInAt)}</TableCell>
-                <TableCell>
-                  {attendee.checkedInAt === null ? (
-                    <span className="text-zinc-400">Não fez check-in</span>
-                  ) : (
-                    dayjs().to(attendee.checkedInAt)
-                  )}
-                </TableCell>
-                <TableCell>
-                  <IconButton
-                    transparent
-                    className="bg-black/20 border border-white/10 rounded-md p-1.5"
-                  >
-                    <MoreHorizontal className="size-4" />
-                  </IconButton>
-                </TableCell>
-              </TableRow>
-            )
-          })}
+          {isLoading && !data && <AttendeeTableSkeleton />}
+          {data &&
+            data?.attendees.map((attendee) => {
+              return (
+                <TableRow key={attendee.id}>
+                  <TableCell>{attendee.id}</TableCell>
+                  <TableCell>
+                    <div className="flex flex-col gap-1">
+                      <span className="font-semibold text-white">
+                        {attendee.name}
+                      </span>
+                      <span>{attendee.email}</span>
+                    </div>
+                  </TableCell>
+                  <TableCell>{dayjs().to(attendee.checkedInAt)}</TableCell>
+                  <TableCell>
+                    {attendee.checkedInAt === null ? (
+                      <span className="text-zinc-400">Não fez check-in</span>
+                    ) : (
+                      dayjs().to(attendee.checkedInAt)
+                    )}
+                  </TableCell>
+                  <TableCell>
+                    <IconButton
+                      transparent
+                      className="bg-black/20 border border-white/10 rounded-md p-1.5"
+                    >
+                      <MoreHorizontal className="size-4" />
+                    </IconButton>
+                  </TableCell>
+                </TableRow>
+              )
+            })}
         </tbody>
         <tfoot>
           <tr>
